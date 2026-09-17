@@ -1,15 +1,15 @@
 export type JellyMood = "idle" | "happy" | "thinking" | "sleepy";
 
+// Hang from the low point of each scallop so they read as part of the bell.
 const TENTACLES = [
-  { x: 26, d: "M26,58 C22,72 30,80 25,96 C21,110 27,116 24,126", w: 1, delay: "0s" },
-  { x: 38, d: "M38,62 C34,78 42,88 37,104 C33,118 39,124 36,134", w: 1.25, delay: "0.5s" },
-  { x: 50, d: "M50,64 C47,82 55,92 50,110 C46,124 51,130 49,140", w: 1, delay: "1s" },
-  { x: 62, d: "M62,64 C65,82 57,92 62,110 C66,124 61,130 63,138", w: 1.25, delay: "0.3s" },
-  { x: 74, d: "M74,62 C78,78 70,88 75,104 C79,116 74,122 76,130", w: 1, delay: "0.8s" },
-  { x: 86, d: "M86,58 C90,72 82,80 87,96 C90,108 85,114 87,124", w: 1, delay: "0.15s" },
+  { d: "M23,55 q7,9 0,17 q-7,7 -1,13", w: 3, delay: "0s" },
+  { d: "M41,56 q-7,11 0,20 q7,9 1,16", w: 3.5, delay: "0.45s" },
+  { d: "M59,56 q7,11 0,20 q-7,9 -1,15", w: 3.5, delay: "0.9s" },
+  { d: "M77,55 q-7,9 0,17 q7,7 1,12", w: 3, delay: "0.25s" },
 ];
 
-/** Engraved-plate jellyfish. Stroke only — inherits currentColor. */
+/** Simple line-drawn jellyfish — rounded bell, scalloped hem, short curling
+ *  tentacles. Stroke only, so it inherits currentColor. */
 export function Jellyfish({
   size = 120,
   mood = "idle",
@@ -22,8 +22,8 @@ export function Jellyfish({
   return (
     <svg
       width={size}
-      height={size * 1.2}
-      viewBox="0 0 112 146"
+      height={size}
+      viewBox="0 0 100 100"
       fill="none"
       className={`drift ${className}`}
       aria-hidden="true"
@@ -31,37 +31,20 @@ export function Jellyfish({
       <g stroke="currentColor" strokeLinecap="round" strokeLinejoin="round">
         {TENTACLES.map((t) => (
           <path
-            key={t.x}
+            key={t.d}
             className="sway"
             style={{ animationDelay: t.delay }}
             d={t.d}
             strokeWidth={t.w}
-            opacity={0.55}
           />
         ))}
 
-        {/* oral arms — shorter, denser */}
-        <path d="M44,58 C42,70 47,76 44,86" strokeWidth={2} opacity={0.75} />
-        <path d="M56,60 C55,72 58,78 56,90" strokeWidth={2} opacity={0.75} />
-        <path d="M68,58 C70,70 65,76 68,86" strokeWidth={2} opacity={0.75} />
-
-        {/* bell */}
+        {/* bell: dome + scalloped hem, filled so tentacles tuck behind it */}
         <path
-          d="M8,54 C8,22 104,22 104,54 C104,60 99,64 94,60 C88,55 82,63 76,59 C70,55 63,63 56,59 C49,55 42,63 36,59 C30,55 24,60 18,60 C13,64 8,60 8,54 Z"
-          strokeWidth={1.75}
+          d="M14,50 C14,14 86,14 86,50 q-9,9 -18,0 q-9,9 -18,0 q-9,9 -18,0 q-9,9 -18,0 Z"
+          strokeWidth={3.5}
           fill="var(--paper)"
         />
-
-        {/* engraving hatch — kept clear of the dome, which peaks at y=30 */}
-        <g strokeWidth={0.75} opacity={0.4}>
-          <path d="M24,51 C25,45 27,42 30,40" />
-          <path d="M36,52 C36,44 37,39 40,36" />
-          <path d="M56,52 L56,34" />
-          <path d="M76,52 C76,44 75,39 72,36" />
-          <path d="M88,51 C87,45 85,42 82,40" />
-        </g>
-
-        <path d="M8,54 C8,22 104,22 104,54" strokeWidth={1.75} />
       </g>
 
       <Face mood={mood} />
@@ -74,59 +57,70 @@ function Face({ mood }: { mood: JellyMood }) {
 
   if (mood === "happy") {
     return (
-      <g stroke={ink} strokeWidth={1.75} strokeLinecap="round" fill="none">
-        <path d="M42,44 q3.5,-4.5 7,0" />
-        <path d="M63,44 q3.5,-4.5 7,0" />
+      <g stroke={ink} strokeWidth={3} strokeLinecap="round" fill="none">
+        <path d="M35,36 q4,-5 8,0" />
+        <path d="M57,36 q4,-5 8,0" />
+        <path d="M44,43 q6,5 12,0" strokeWidth={2.6} />
       </g>
     );
   }
+
   if (mood === "sleepy") {
     return (
-      <g stroke={ink} strokeWidth={1.75} strokeLinecap="round" fill="none">
-        <path d="M42,46 q3.5,4 7,0" />
-        <path d="M63,46 q3.5,4 7,0" />
+      <g stroke={ink} strokeWidth={3} strokeLinecap="round" fill="none">
+        <path d="M35,38 q4,4 8,0" />
+        <path d="M57,38 q4,4 8,0" />
       </g>
     );
   }
+
   if (mood === "thinking") {
     return (
       <g fill={ink}>
-        <circle cx="45.5" cy="45" r="2" />
-        <circle cx="66.5" cy="45" r="2" />
+        <circle cx="39" cy="37" r="3" />
+        <circle cx="61" cy="37" r="3" />
         <path
-          d="M50,53 h12"
+          d="M45,45 h10"
           stroke={ink}
-          strokeWidth={1.5}
+          strokeWidth={2.6}
           strokeLinecap="round"
         />
       </g>
     );
   }
+
   return (
     <g fill={ink}>
-      <circle cx="45.5" cy="45" r="2.2" />
-      <circle cx="66.5" cy="45" r="2.2" />
+      <circle cx="39" cy="37" r="3.2" />
+      <circle cx="61" cy="37" r="3.2" />
+      <path
+        d="M44,44 q6,4 12,0"
+        stroke={ink}
+        strokeWidth={2.6}
+        strokeLinecap="round"
+        fill="none"
+      />
     </g>
   );
 }
 
-/** Wordmark companion — a single glyph, no animation. */
+/** Wordmark glyph — same shape, simplified for small sizes. */
 export function JellyMark({ className = "" }: { className?: string }) {
   return (
     <svg
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth={1.6}
+      strokeWidth={1.7}
       strokeLinecap="round"
       strokeLinejoin="round"
       className={className}
       aria-hidden="true"
     >
-      <path d="M2.5,11 C2.5,5 21.5,5 21.5,11 C21.5,12.4 20.2,13.2 19,12.2 C17.6,11 16.2,12.8 14.8,11.8 C13.4,10.8 11.8,12.6 10.2,11.6 C8.8,10.8 7.2,12.4 5.8,12.2 C4.4,13.2 2.5,12.4 2.5,11 Z" />
-      <path d="M8,13 C7.4,16 9,17.5 8,21" />
-      <path d="M12,13.5 C11.6,17 13,18.5 12,22" />
-      <path d="M16,13 C16.6,16 15,17.5 16,21" />
+      <path d="M3,12 C3,5.5 21,5.5 21,12 q-2.25,2.2 -4.5,0 q-2.25,2.2 -4.5,0 q-2.25,2.2 -4.5,0 q-2.25,2.2 -4.5,0 Z" />
+      <path d="M7.5,14 q1.8,2.4 0,4.6" />
+      <path d="M12,14.5 q-1.8,2.6 0,5" />
+      <path d="M16.5,14 q1.8,2.4 0,4.6" />
     </svg>
   );
 }
