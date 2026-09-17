@@ -39,9 +39,9 @@ export function Jellyfish({
           />
         ))}
 
-        {/* bell — narrower and taller, so the face has vertical room */}
+        {/* bell — ~15% bigger than the tentacles were sized for */}
         <path
-          d="M18,50 C18,-5 94,-5 94,50 C94,56 90,60 86,56 C81,51 76,59 71,55 C67,51 61,59 56,55 C51,51 46,59 41,55 C38,51 33,56 29,56 C26,60 22,56 18,50 Z"
+          d="M12,50 C12,-13 100,-13 100,50 C100,57 95,62 91,57 C85,51 79,60 73,56 C69,51 62,60 56,56 C50,51 45,60 39,56 C35,51 30,57 25,57 C22,62 17,57 12,50 Z"
           strokeWidth={1.75}
           fill="var(--paper)"
         />
