@@ -136,7 +136,7 @@ export function AvailabilityGrid({
       </div>
 
       <p className="label mt-2 normal-case tracking-normal">
-        Click and drag to paint free hours — drag over filled cells to clear.
+        Click and drag to paint free hours. Drag over filled cells to clear.
       </p>
     </div>
   );

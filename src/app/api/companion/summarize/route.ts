@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
       max_tokens: 4000,
       system: [
         "You turn an end-of-day conversation into that person's diary entry.",
-        "Write `entry` in first person, as if they wrote it themselves — past tense, 2 short paragraphs at most, plain language, no headings.",
+        "Write `entry` in first person, as if they wrote it themselves: past tense, 2 short paragraphs at most, plain language, no headings, no em dashes.",
         "Only include what they actually said. Never invent events, names or feelings.",
         "`mood` is one lowercase word. `highlights` is 2-4 short factual phrases drawn from the conversation.",
       ].join("\n"),

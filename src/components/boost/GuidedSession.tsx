@@ -105,7 +105,7 @@ export function GuidedSession({
             <span className="label text-ink">{jellyName}</span>
             <p className="mt-1 text-[14px] leading-relaxed text-ink-2">
               {done
-                ? "That's it. You're a bit different than you were five minutes ago — that's the whole point."
+                ? "That's it. You're a bit different than you were five minutes ago. That's the whole point."
                 : phase
                   ? phaseCoaching(phase.label)
                   : activity.kind === "outdoor"
@@ -163,7 +163,7 @@ export function GuidedSession({
 
         {video.status === "unavailable" && (
           <p className="border-t border-rule px-6 py-3 text-[13px] text-ink-3">
-            No embed available — set{" "}
+            No embed available. Set{" "}
             <code className="metric text-ink">YOUTUBE_API_KEY</code>, or{" "}
             <a
               href={youtubeSearchUrl(activity.query)}
@@ -254,7 +254,7 @@ function breathPhase(
 }
 
 function phaseCoaching(label: string) {
-  if (label === "Breathe in") return "In through the nose — let your belly go first.";
+  if (label === "Breathe in") return "In through the nose, let your belly go first.";
   if (label === "Hold") return "Hold it. Loose, not clenched.";
   return "Out slowly, longer than the way in. That's the part that settles you.";
 }

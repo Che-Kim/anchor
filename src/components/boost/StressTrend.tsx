@@ -56,7 +56,7 @@ export function StressTrend({ points }: { points: TrendPoint[] }) {
   if (points.length === 0) {
     return (
       <p className="label normal-case tracking-normal">
-        No check-ins yet — the trend starts after your first.
+        No check-ins yet. The trend starts after your first.
       </p>
     );
   }

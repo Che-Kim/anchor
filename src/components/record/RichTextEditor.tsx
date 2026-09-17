@@ -7,7 +7,7 @@ const TOOLS = [
   { cmd: "italic", label: "I", title: "Italic", className: "italic" },
   { cmd: "underline", label: "U", title: "Underline", className: "underline" },
   { cmd: "formatBlock:h3", label: "H", title: "Heading", className: "" },
-  { cmd: "insertUnorderedList", label: "—", title: "Bullet list", className: "" },
+  { cmd: "insertUnorderedList", label: "•", title: "Bullet list", className: "" },
 ] as const;
 
 export function RichTextEditor({

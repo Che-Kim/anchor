@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
   if (!allowed) {
     return send({
       reply:
-        "I've hit my limit of talking for today — the demo caps how much I can say per visitor. Everything else still works.",
+        "I've hit my limit of talking for today. The demo caps how much I can say per visitor. Everything else still works.",
       limited: true,
     });
   }
@@ -57,7 +57,7 @@ export async function POST(request: NextRequest) {
     if (response.stop_reason === "refusal") {
       return send({
         reply:
-          "I don't think I'm the right one to carry that with you — please reach out to someone who can help properly.",
+          "I don't think I'm the right one to carry that with you. Please reach out to someone who can help properly.",
         refused: true,
       });
     }
@@ -71,7 +71,7 @@ export async function POST(request: NextRequest) {
     return send({ reply: text || scriptedReply(turns) });
   } catch (error) {
     if (error instanceof Anthropic.RateLimitError) {
-      return send({ error: "Rate limited — give it a moment." }, { status: 429 });
+      return send({ error: "Rate limited. Give it a moment." }, { status: 429 });
     }
     if (error instanceof Anthropic.AuthenticationError) {
       return send({ reply: scriptedReply(turns), scripted: true });

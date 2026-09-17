@@ -160,7 +160,7 @@ export function CheckInStrip({
 
       <div className="lg:col-span-5">
         <p className="label border-b border-rule pb-2">
-          Stress · last {points.length || "—"}
+          Stress · last {points.length || "-"}
         </p>
         <div className="pt-3">
           <StressTrend points={points} />

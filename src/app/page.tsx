@@ -39,7 +39,7 @@ export default function Home() {
         {/* Asymmetric masthead block — type left, plate right. */}
         <section className="grid grid-cols-1 gap-10 py-14 lg:grid-cols-12 lg:gap-8 lg:py-20">
           <div className="lg:col-span-7">
-            <p className="label">Anchor — a day, handled</p>
+            <p className="label">Anchor: a day, handled</p>
             <h1 className="display mt-5 text-[clamp(3.25rem,9vw,5.75rem)] text-ink">
               Ready to
               <br />

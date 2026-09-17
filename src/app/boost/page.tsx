@@ -119,7 +119,7 @@ export default function BoostPage() {
             ) : (
               loaded && (
                 <p className="py-3 text-[13px] text-ink-3">
-                  Nothing to read yet —{" "}
+                  Nothing to read yet:{" "}
                   <Link href="/plan" className="text-accent underline underline-offset-2">
                     plan a day
                   </Link>{" "}

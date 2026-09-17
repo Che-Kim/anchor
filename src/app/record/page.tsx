@@ -201,7 +201,7 @@ function ModeSelect({
           onClick={() => onPick("solo")}
           className="group border-rule px-1 py-10 text-left transition-colors hover:bg-paper-2 md:border-r md:pr-10"
         >
-          <span className="label">01 — No AI</span>
+          <span className="label">01 · No AI</span>
           <h2 className="display mt-3 text-[32px] text-ink transition-colors group-hover:text-accent">
             Write it myself
           </h2>
@@ -225,7 +225,7 @@ function ModeSelect({
         >
           <div className="flex items-start justify-between gap-4">
             <div>
-              <span className="label">02 — With {jellyName}</span>
+              <span className="label">02 · With {jellyName}</span>
               <h2 className="display mt-3 text-[32px] text-ink transition-colors group-hover:text-accent">
                 Talk it through
               </h2>
@@ -275,7 +275,7 @@ function ModeSelect({
                     {stripHtml(e.content).slice(0, 110) || "Empty entry"}
                   </td>
                   <td className="py-3 text-right align-top">
-                    {e.mood ? <Tag>{e.mood}</Tag> : <span className="label">—</span>}
+                    {e.mood ? <Tag>{e.mood}</Tag> : <span className="label">-</span>}
                   </td>
                 </tr>
               ))}

@@ -146,7 +146,7 @@ function Row({
 
         <div className="col-span-3 flex items-center justify-end gap-2">
           <span className="metric text-[13px] text-ink-2">
-            {task.deadline ? formatDeadline(task.deadline) : "—"}
+            {task.deadline ? formatDeadline(task.deadline) : "-"}
           </span>
           <button
             onClick={onRemove}

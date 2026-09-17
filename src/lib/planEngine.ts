@@ -100,10 +100,10 @@ function buildReason(
 ) {
   if (rank === 0) {
     if (hoursUntilDue !== null && hoursUntilDue <= 12) {
-      return "Due within the day — this one sets the pace";
+      return "Due within the day, sets the pace";
     }
     if (task.difficulty === "hard") {
-      return "Heaviest lift — takes your freshest hours";
+      return "Heaviest lift, takes your freshest hours";
     }
     if (hoursUntilDue !== null) {
       return "Tightest deadline of the batch";
@@ -112,13 +112,13 @@ function buildReason(
   }
 
   if (task.difficulty === "hard") {
-    return "Heavy lift — placed while your focus holds";
+    return "Heavy lift, placed while your focus holds";
   }
   if (task.minutes <= 45) {
     return "Quick win to break up the heavier work";
   }
   if (hoursUntilDue === null) {
-    return "No deadline — slots into leftover space";
+    return "No deadline, slots into leftover space";
   }
   if (rank === total - 1) {
     return "Lightest pull, so it rides at the back";
@@ -235,7 +235,7 @@ export function buildCompanionTips(
     tips.push({
       id: "overview",
       mood: "happy",
-      text: `All set — ${taskBlocks.length} task${taskBlocks.length === 1 ? "" : "s"} across ${(focusMinutes / 60).toFixed(1)} focus hours. I kept the heavy ones early while your attention is sharpest.`,
+      text: `All set. ${taskBlocks.length} task${taskBlocks.length === 1 ? "" : "s"} across ${(focusMinutes / 60).toFixed(1)} focus hours. I kept the heavy ones early while your attention is sharpest.`,
     });
   }
 
@@ -243,7 +243,7 @@ export function buildCompanionTips(
     tips.push({
       id: "breaks",
       mood: "idle",
-      text: `I tucked ${breaks} breather${breaks === 1 ? "" : "s"} in after your hard task${hardCount === 1 ? "" : "s"}. Stand up, look out a window — it's part of the plan, not a detour.`,
+      text: `I tucked ${breaks} breather${breaks === 1 ? "" : "s"} in after your hard task${hardCount === 1 ? "" : "s"}. Stand up, look out a window. It's part of the plan, not a detour.`,
     });
   }
 
@@ -271,7 +271,7 @@ export function buildCompanionTips(
     tips.push({
       id: "load",
       mood: "sleepy",
-      text: "That's a heavy day. If it starts slipping, drop the lowest task rather than shortening your breaks — tired hours aren't cheaper.",
+      text: "That's a heavy day. If it starts slipping, drop the lowest task rather than shortening your breaks. Tired hours aren't cheaper.",
     });
   }
 

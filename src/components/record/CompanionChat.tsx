@@ -53,7 +53,7 @@ export function CompanionChat({
         ...next,
         {
           role: "assistant",
-          content: data.reply ?? "I lost my train of thought there — say that again?",
+          content: data.reply ?? "I lost my train of thought there. Say that again?",
         },
       ]);
     } catch {
@@ -100,7 +100,7 @@ export function CompanionChat({
         <div className="flex items-start gap-3">
           <Jellyfish size={40} mood="idle" className="shrink-0 text-ink" />
           <Bubble from="assistant">
-            Hey. How did today actually go? Start anywhere — I&apos;ll keep up.
+            Hey. How did today actually go? Start anywhere, I&apos;ll keep up.
           </Bubble>
         </div>
 
@@ -155,7 +155,7 @@ export function CompanionChat({
       <div className="flex items-center justify-between gap-3 border-t border-rule py-3">
         <p className="label normal-case tracking-normal">
           {scripted
-            ? "Running offline replies — add ANTHROPIC_API_KEY for the real companion."
+            ? "Running offline replies. Add ANTHROPIC_API_KEY for the real companion."
             : "Ending the session writes this up as today's entry."}
         </p>
         <button

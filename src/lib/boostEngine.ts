@@ -214,12 +214,12 @@ export function readContext(ctx: BoostContext): BoostReading {
 
   const narration =
     weighted.length === 0
-      ? "I don't have much to go on yet — plan a day or check in and I'll tailor this. Until then, here's what usually helps."
+      ? "I don't have much to go on yet. Plan a day or check in and I'll tailor this. Until then, here's what usually helps."
       : load === "heavy"
-        ? `I looked at your day and what stands out is ${driver}. When it's stacked like that, the short things are the ones you'll actually finish — so I've put those first.`
+        ? `I looked at your day and what stands out is ${driver}. When it's stacked like that, the short things are the ones you'll actually finish, so I've put those first.`
         : load === "balanced"
           ? `Your day reads as workable, with ${driver}. A real break between blocks is what keeps it that way.`
-          : `Nothing's screaming at you today — ${driver}. Good day to take the longer option.`;
+          : `Nothing's screaming at you today: ${driver}. Good day to take the longer option.`;
 
   return { load, score, headline, signals, narration };
 }

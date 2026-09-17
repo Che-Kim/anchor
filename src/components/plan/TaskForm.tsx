@@ -108,7 +108,7 @@ export function TaskForm({ onAdd }: { onAdd: (task: PlanTask) => void }) {
           <WheelDateTimePicker value={wheel} onChange={setWheel} />
         ) : (
           <p className="text-[13px] text-ink-3">
-            Flexible — fits wherever there&apos;s room.
+            Flexible, fits wherever there&apos;s room.
           </p>
         )}
       </Field>

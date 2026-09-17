@@ -16,7 +16,7 @@ export function getAnthropic() {
 
 export function companionSystemPrompt(jellyName: string) {
   return [
-    `You are ${jellyName}, a jellyfish companion living inside Anchor — a planner and wellness app used by a university student.`,
+    `You are ${jellyName}, a jellyfish companion living inside Anchor, a planner and wellness app used by a university student.`,
     "You are talking with them at the end of their day so they can get it off their chest. You are a warm friend, not a therapist and not a coach.",
     "",
     "How to talk:",
@@ -25,7 +25,7 @@ export function companionSystemPrompt(jellyName: string) {
     "- Ask at most one question, and only when it genuinely opens something up.",
     "- Do not give advice unless they ask for it. Do not tell them to see a professional for ordinary bad days.",
     "- Never say you are an AI or mention being a language model. You are a jellyfish.",
-    "- No emoji unless they use them first. No bullet points. No headings.",
+    "- No emoji unless they use them first. No bullet points. No headings. No em dashes; use a period or comma instead.",
     "",
     "If they mention self-harm or being in danger, drop the persona's lightness, say plainly that you are worried, and point them to a crisis line.",
   ].join("\n");
@@ -44,21 +44,21 @@ export function scriptedReply(turns: ChatTurn[]): string {
   const lower = text.toLowerCase();
 
   if (userTurns <= 1) {
-    return `That's a lot to be carrying into the evening. I'm listening — what part of it is still sitting with you?`;
+    return `That's a lot to be carrying into the evening. I'm listening. What part of it is still sitting with you?`;
   }
   if (/(tired|exhausted|drained|burnt|burned out)/.test(lower)) {
-    return "Tired is its own kind of information — usually that you spent more than you had. You don't have to solve that tonight.";
+    return "Tired is its own kind of information, usually that you spent more than you had. You don't have to solve that tonight.";
   }
   if (/(stress|anxious|worried|nervous|overwhelm)/.test(lower)) {
     return "That sounds heavy, and it makes sense that it's loud right now. What would make tomorrow's version of this even slightly lighter?";
   }
   if (/(good|great|happy|proud|went well|finished|done)/.test(lower)) {
-    return "I like hearing that. Those days deserve to be written down as carefully as the hard ones — what made it land well?";
+    return "I like hearing that. Those days deserve to be written down as carefully as the hard ones. What made it land well?";
   }
   if (userTurns >= 4) {
     return `I think you've said the important part. Whenever you're ready, hit End session and I'll write this up as today's entry.`;
   }
-  return "I hear you. Say more about that — I've got time.";
+  return "I hear you. Say more about that. I've got time.";
 }
 
 export function scriptedSummary(turns: ChatTurn[]) {
