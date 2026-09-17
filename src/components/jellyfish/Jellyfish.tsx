@@ -2,11 +2,10 @@ export type JellyMood = "idle" | "happy" | "thinking" | "sleepy";
 
 const TENTACLES = [
   { x: 26, d: "M26,58 C24,66 28,71 25,81 C23,89 27,93 25,99", w: 1, delay: "0s" },
-  { x: 38, d: "M38,62 C36,72 40,78 37,87 C35,96 39,99 37,105", w: 1.25, delay: "0.5s" },
-  { x: 50, d: "M50,64 C48,75 53,81 50,92 C48,100 51,104 49,110", w: 1, delay: "1s" },
-  { x: 62, d: "M62,64 C64,75 59,81 62,92 C64,100 61,104 63,108", w: 1.25, delay: "0.3s" },
-  { x: 74, d: "M74,62 C76,72 72,78 75,87 C77,94 74,98 75,103", w: 1, delay: "0.8s" },
-  { x: 86, d: "M86,58 C88,66 84,71 87,81 C88,88 85,92 87,98", w: 1, delay: "0.15s" },
+  { x: 41, d: "M41,62 C39,72 43,78 40,87 C38,96 42,99 40,105", w: 1.25, delay: "0.5s" },
+  { x: 56, d: "M56,64 C54,75 59,81 56,92 C54,100 57,104 55,110", w: 1, delay: "1s" },
+  { x: 71, d: "M71,62 C73,72 69,78 72,87 C74,94 71,98 72,103", w: 1.25, delay: "0.3s" },
+  { x: 86, d: "M86,58 C88,66 84,71 87,81 C88,88 85,92 87,98", w: 1, delay: "0.8s" },
 ];
 
 /** Engraved-plate jellyfish. Stroke only — inherits currentColor. */
@@ -40,9 +39,9 @@ export function Jellyfish({
           />
         ))}
 
-        {/* bell — widened to give the face more room */}
+        {/* bell — narrower and taller, so the face has vertical room */}
         <path
-          d="M2,54 C2,22 110,22 110,54 C110,60 104,64 99,60 C92,55 85,63 78,59 C72,55 64,63 56,59 C48,55 40,63 32,59 C27,55 20,60 13,60 C8,64 2,60 2,54 Z"
+          d="M18,50 C18,-5 94,-5 94,50 C94,56 90,60 86,56 C81,51 76,59 71,55 C67,51 61,59 56,55 C51,51 46,59 41,55 C38,51 33,56 29,56 C26,60 22,56 18,50 Z"
           strokeWidth={1.75}
           fill="var(--paper)"
         />
@@ -59,26 +58,26 @@ function Face({ mood }: { mood: JellyMood }) {
   if (mood === "happy") {
     return (
       <g stroke={ink} strokeWidth={1.75} strokeLinecap="round" fill="none">
-        <path d="M40,37 q4,-4.5 8,0" />
-        <path d="M64,37 q4,-4.5 8,0" />
+        <path d="M40,24 q4,-4.5 8,0" />
+        <path d="M64,24 q4,-4.5 8,0" />
       </g>
     );
   }
   if (mood === "sleepy") {
     return (
       <g stroke={ink} strokeWidth={1.75} strokeLinecap="round" fill="none">
-        <path d="M40,39 q4,4 8,0" />
-        <path d="M64,39 q4,4 8,0" />
+        <path d="M40,26 q4,4 8,0" />
+        <path d="M64,26 q4,4 8,0" />
       </g>
     );
   }
   if (mood === "thinking") {
     return (
       <g fill={ink}>
-        <circle cx="44" cy="38" r="2" />
-        <circle cx="68" cy="38" r="2" />
+        <circle cx="44" cy="25" r="2" />
+        <circle cx="68" cy="25" r="2" />
         <path
-          d="M49,46 h11"
+          d="M49,33 h11"
           stroke={ink}
           strokeWidth={1.5}
           strokeLinecap="round"
@@ -89,12 +88,12 @@ function Face({ mood }: { mood: JellyMood }) {
 
   return (
     <g fill={ink}>
-      <ellipse cx="49" cy="49" rx="3.6" ry="4.2" />
-      <ellipse cx="72" cy="49" rx="3.6" ry="4.2" />
-      <circle cx="50.3" cy="47.5" r="1.3" fill="white" />
-      <circle cx="73.3" cy="47.5" r="1.3" fill="white" />
+      <ellipse cx="44" cy="26" rx="3.6" ry="4.2" />
+      <ellipse cx="68" cy="26" rx="3.6" ry="4.2" />
+      <circle cx="45.3" cy="24.5" r="1.3" fill="white" />
+      <circle cx="69.3" cy="24.5" r="1.3" fill="white" />
       <path
-        d="M55,58 q6,4 11,0"
+        d="M50,35 q6,4 11,0"
         stroke={ink}
         strokeWidth="2"
         strokeLinecap="round"
