@@ -1,0 +1,48 @@
+// Postgres in every environment — the deploy target is serverless, where a
+// SQLite file would be read-only and thrown away between invocations.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// Anchor has no accounts. An anonymous cookie scopes each visitor's data so a
+// public demo never shows one person's journal to another.
+model CheckIn {
+  id          String   @id @default(cuid())
+  visitorId   String
+  mood        String
+  stressLevel Int
+  note        String?
+  createdAt   DateTime @default(now())
+
+  @@index([visitorId, createdAt])
+}
+
+model DiaryEntry {
+  visitorId  String
+  // Local calendar day, "YYYY-MM-DD" — one entry per visitor per day.
+  date       String
+  mode       String
+  content    String
+  mood       String?
+  highlights String?
+  transcript String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@id([visitorId, date])
+}
+
+// Caps what a single visitor can spend of the deployment's API budget.
+model CompanionUsage {
+  visitorId String
+  day       String
+  calls     Int    @default(0)
+
+  @@id([visitorId, day])
+}

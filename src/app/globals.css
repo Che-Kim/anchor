@@ -1,0 +1,152 @@
+@import "tailwindcss";
+
+/*
+  Anchor design system — "admiralty chart".
+  Ink on warm paper, hairline rules for structure, one accent for interaction,
+  one signal reserved for status. All ink/accent values verified >= 4.5:1 on
+  their surface; the difficulty ramp is a validated single-hue ordinal scale.
+*/
+
+:root {
+  --paper: #fbfaf7;
+  --paper-2: #f4f1ea;
+  --paper-3: #eae6dc;
+  --rule: #dfdacf;
+  --rule-strong: #c2bcae;
+
+  --ink: #16191c;
+  --ink-2: #4a4f55;
+  --ink-3: #666b70;
+
+  --accent: #0e6b6b;
+  --accent-deep: #0a4f4f;
+  --accent-wash: #e6efec;
+
+  --signal: #b23a26;
+  --signal-wash: #f7e9e5;
+
+  /* Ordinal difficulty ramp — one hue, light to dark */
+  --diff-1: #7fb6b0;
+  --diff-2: #2e7d77;
+  --diff-3: #0e4a47;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #141513;
+    --paper-2: #1c1e1b;
+    --paper-3: #252722;
+    --rule: #2e302b;
+    --rule-strong: #43463f;
+
+    --ink: #edeae3;
+    --ink-2: #a8a49b;
+    --ink-3: #8a867e;
+
+    --accent: #5fb3ad;
+    --accent-deep: #8bcdc7;
+    --accent-wash: #1a2725;
+
+    --signal: #e08165;
+    --signal-wash: #2b1e1a;
+
+    --diff-1: #1d5450;
+    --diff-2: #3f918a;
+    --diff-3: #86ccc5;
+  }
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-paper-3: var(--paper-3);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-accent: var(--accent);
+  --color-accent-deep: var(--accent-deep);
+  --color-accent-wash: var(--accent-wash);
+  --color-signal: var(--signal);
+  --color-signal-wash: var(--signal-wash);
+  --color-diff-1: var(--diff-1);
+  --color-diff-2: var(--diff-2);
+  --color-diff-3: var(--diff-3);
+
+  --font-display: var(--font-display);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Display type is set tight and optically, never at body tracking. */
+.display {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+}
+
+/* The one label style: mono, uppercase, tracked out. Used for every
+   eyebrow, column head and metric caption so they read as one system. */
+.label {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  line-height: 1.2;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.metric {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+/* Precise, consistent focus — never a glow. */
+:where(a, button, input, textarea, select, [tabindex], [contenteditable]):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 1px;
+}
+
+::selection {
+  background: var(--accent-wash);
+  color: var(--ink);
+}
+
+@keyframes drift {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes sway {
+  0%, 100% { transform: rotate(-3.5deg); }
+  50% { transform: rotate(3.5deg); }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.drift { animation: drift 5s ease-in-out infinite; }
+.sway { animation: sway 4s ease-in-out infinite; transform-box: fill-box; transform-origin: top center; }
+.rise { animation: rise 0.35s cubic-bezier(0.2, 0.6, 0.3, 1) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .drift, .sway, .rise { animation: none; }
+}
+
+.no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
