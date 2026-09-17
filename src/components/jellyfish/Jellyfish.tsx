@@ -1,11 +1,13 @@
 export type JellyMood = "idle" | "happy" | "thinking" | "sleepy";
 
+// Each tentacle starts exactly on its hem valley (see BELL_PATH) — same
+// x, y=57 — so there's no gap between bell and tentacle.
 const TENTACLES = [
-  { x: 26, d: "M26,58 C24,66 28,71 25,81 C23,89 27,93 25,99", w: 1, delay: "0s" },
-  { x: 41, d: "M41,62 C39,72 43,78 40,87 C38,96 42,99 40,105", w: 1.25, delay: "0.5s" },
-  { x: 56, d: "M56,64 C54,75 59,81 56,92 C54,100 57,104 55,110", w: 1, delay: "1s" },
-  { x: 71, d: "M71,62 C73,72 69,78 72,87 C74,94 71,98 72,103", w: 1.25, delay: "0.3s" },
-  { x: 86, d: "M86,58 C88,66 84,71 87,81 C88,88 85,92 87,98", w: 1, delay: "0.8s" },
+  { x: 26, d: "M26,57 C24,65 28,70 25,80 C23,88 27,92 25,98", w: 1, delay: "0s" },
+  { x: 41, d: "M41,57 C39,67 43,73 40,82 C38,91 42,94 40,100", w: 1.25, delay: "0.5s" },
+  { x: 56, d: "M56,57 C54,68 59,74 56,85 C54,93 57,97 55,103", w: 1, delay: "1s" },
+  { x: 71, d: "M71,57 C73,67 69,73 72,82 C74,89 71,93 72,98", w: 1.25, delay: "0.3s" },
+  { x: 86, d: "M86,57 C88,65 84,70 87,80 C88,87 85,91 87,97", w: 1, delay: "0.8s" },
 ];
 
 /** Engraved-plate jellyfish. Stroke only — inherits currentColor. */
@@ -39,11 +41,16 @@ export function Jellyfish({
           />
         ))}
 
-        {/* bell — hem is one smooth-curve (S) chain so the wave's tangent
-            carries through each bump instead of kinking at the joins */}
+        {/* bell — the dome arrives at each base corner heading straight
+            down; the first/last hem segments continue that motion for a
+            longer run (C1 10 units below the corner, same x) before
+            curving into the wave, so the corner reads as a genuine round
+            rather than a softened crease. The five inner bumps are one
+            smooth-curve (S) chain so their tangent carries through every
+            join. */}
         <path
           d="M12,50 C12,-13 100,-13 100,50
-             C95,50 91,57 86,57
+             C100,60 90,60 86,57
              S81,50 78.5,50
              S73.5,57 71,57
              S66,50 63.5,50
@@ -52,7 +59,7 @@ export function Jellyfish({
              S43.5,57 41,57
              S36,50 33.5,50
              S28.5,57 26,57
-             S17,50 12,50 Z"
+             C22,60 12,60 12,50 Z"
           strokeWidth={1.75}
           fill="var(--paper)"
         />
