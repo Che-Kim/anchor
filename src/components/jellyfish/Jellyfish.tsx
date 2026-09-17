@@ -39,9 +39,20 @@ export function Jellyfish({
           />
         ))}
 
-        {/* bell — ~15% bigger than the tentacles were sized for */}
+        {/* bell — hem is one smooth-curve (S) chain so the wave's tangent
+            carries through each bump instead of kinking at the joins */}
         <path
-          d="M12,50 C12,-13 100,-13 100,50 C100,57 95,62 91,57 C85,51 79,60 73,56 C69,51 62,60 56,56 C50,51 45,60 39,56 C35,51 30,57 25,57 C22,62 17,57 12,50 Z"
+          d="M12,50 C12,-13 100,-13 100,50
+             C95,50 91,57 86,57
+             S81,50 78.5,50
+             S73.5,57 71,57
+             S66,50 63.5,50
+             S58.5,57 56,57
+             S51,50 48.5,50
+             S43.5,57 41,57
+             S36,50 33.5,50
+             S28.5,57 26,57
+             S17,50 12,50 Z"
           strokeWidth={1.75}
           fill="var(--paper)"
         />
