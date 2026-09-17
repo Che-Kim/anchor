@@ -1,28 +1,28 @@
 export type JellyMood = "idle" | "happy" | "thinking" | "sleepy";
 
-/**
- * The whole silhouette — dome, hem, and all three tentacles — is one
- * unbroken path: apex → down the left side → dip/rise through each
- * tentacle → up the right side → back to the apex. No fill, so the body
- * is just the outline and the face floats in the open space inside it.
- * The dome stays flat and wide and the tentacles hang well below it —
- * a rounder dome or shorter tentacles read as a ghost, not a jellyfish.
- */
-const BODY_PATH =
+const STROKE = 2.25;
+
+/** Dome + hem only — no fill, so the face floats in open space. Static;
+ *  the tentacles below are what sway. */
+const DOME_PATH =
   "M50,8" +
-  "C30,8 8,18 8,42" + // apex → left base (flat, wide dome)
-  "C10,44 16,44 20,44" + // left base → tentacle 1 entry
-  "C15,58 10,72 12,90" + // tentacle 1 entry → tip (splays left)
-  "C16,80 22,62 30,46" + // tentacle 1 tip → exit
-  "C36,44 40,44 44,46" + // tentacle 1 exit → tentacle 2 entry
-  "C46,60 48,76 50,90" + // tentacle 2 entry → tip (hangs straight)
-  "C52,76 54,60 56,46" + // tentacle 2 tip → exit
-  "C60,44 64,44 70,46" + // tentacle 2 exit → tentacle 3 entry
-  "C78,62 84,80 88,90" + // tentacle 3 entry → tip (splays right)
-  "C90,72 85,58 80,44" + // tentacle 3 tip → exit
-  "C84,44 90,44 92,42" + // tentacle 3 exit → right base
-  "C92,18 70,8 50,8" + // right base → apex
+  "C30,8 10,18 10,42" +
+  "C25,49 75,49 90,42" +
+  "C90,18 70,8 50,8" +
   "Z";
+
+/**
+ * Each tentacle is a single curving stroke — not a loop — so a round
+ * linecap gives it a soft, rounded tip instead of meeting itself in a
+ * point. They start exactly on the dome's hem so the whole figure still
+ * reads as one continuous drawing at rest; the seam is what lets each
+ * one sway independently.
+ */
+const TENTACLES = [
+  { d: "M25,44 C17,53 11,60 14,70 C16,77 19,79 16,85", delay: "0s" },
+  { d: "M50,46 C46,56 54,64 50,74 C47,80 53,83 50,89", delay: "0.5s" },
+  { d: "M75,44 C83,53 89,60 86,70 C84,77 81,79 84,85", delay: "0.25s" },
+];
 
 export function Jellyfish({
   size = 120,
@@ -43,12 +43,24 @@ export function Jellyfish({
       aria-hidden="true"
     >
       <path
-        d={BODY_PATH}
+        d={DOME_PATH}
         stroke="currentColor"
-        strokeWidth={3.5}
+        strokeWidth={STROKE}
         strokeLinecap="round"
         strokeLinejoin="round"
       />
+      {TENTACLES.map((t) => (
+        <path
+          key={t.d}
+          className="sway"
+          style={{ animationDelay: t.delay }}
+          d={t.d}
+          stroke="currentColor"
+          strokeWidth={STROKE}
+          strokeLinecap="round"
+          fill="none"
+        />
+      ))}
       <Face mood={mood} />
     </svg>
   );
@@ -59,17 +71,17 @@ function Face({ mood }: { mood: JellyMood }) {
 
   if (mood === "happy") {
     return (
-      <g stroke={ink} strokeWidth={3} strokeLinecap="round" fill="none">
+      <g stroke={ink} strokeWidth={STROKE} strokeLinecap="round" fill="none">
         <path d="M37,22 q4,-5 8,0" />
         <path d="M55,22 q4,-5 8,0" />
-        <path d="M43,30 q7,5 14,0" strokeWidth={2.6} />
+        <path d="M43,30 q7,5 14,0" />
       </g>
     );
   }
 
   if (mood === "sleepy") {
     return (
-      <g stroke={ink} strokeWidth={3} strokeLinecap="round" fill="none">
+      <g stroke={ink} strokeWidth={STROKE} strokeLinecap="round" fill="none">
         <path d="M37,24 q4,4 8,0" />
         <path d="M55,24 q4,4 8,0" />
       </g>
@@ -79,26 +91,21 @@ function Face({ mood }: { mood: JellyMood }) {
   if (mood === "thinking") {
     return (
       <g fill={ink}>
-        <circle cx="41" cy="23" r="3" />
-        <circle cx="59" cy="23" r="3" />
-        <path
-          d="M44,31 h12"
-          stroke={ink}
-          strokeWidth={2.6}
-          strokeLinecap="round"
-        />
+        <circle cx="41" cy="23" r="2.6" />
+        <circle cx="59" cy="23" r="2.6" />
+        <path d="M44,31 h12" stroke={ink} strokeWidth={STROKE} strokeLinecap="round" />
       </g>
     );
   }
 
   return (
     <g fill={ink}>
-      <circle cx="41" cy="23" r="3.2" />
-      <circle cx="59" cy="23" r="3.2" />
+      <circle cx="41" cy="23" r="2.8" />
+      <circle cx="59" cy="23" r="2.8" />
       <path
         d="M43,30 q7,4 14,0"
         stroke={ink}
-        strokeWidth={2.6}
+        strokeWidth={STROKE}
         strokeLinecap="round"
         fill="none"
       />
@@ -106,20 +113,25 @@ function Face({ mood }: { mood: JellyMood }) {
   );
 }
 
-/** Wordmark glyph — same idea, fewer wiggles so it holds up at 24px. */
+/** Wordmark glyph — same idea, simplified for legibility at 24px. */
 export function JellyMark({ className = "" }: { className?: string }) {
   return (
     <svg
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth={1.7}
+      strokeWidth={1.5}
       strokeLinecap="round"
       strokeLinejoin="round"
       className={className}
       aria-hidden="true"
     >
-      <path d="M12,2.5 C8,2.5 4,5 4,10.5 C4,13.5 5.5,16 7,17.5 C8,18.5 8.5,16.5 9,14 C9.5,17 10.5,19.5 11.5,21.5 C12.5,19.5 13.5,17 14,14 C14.5,16.5 15,18.5 16,17.5 C17.5,16 19,13.5 19,10.5 C19,5 16,2.5 12,2.5 Z" />
+      <path d="M6,10 C6,4.5 18,4.5 18,10 C18,11.7 15.5,11.7 15.5,10" />
+      <path d="M18,10 C21,11.7 21,12.5 21,12" />
+      <path d="M6,10 C3,11.7 3,12.5 3,12" />
+      <path d="M8,10.5 C7,13 5.5,15 7,18" />
+      <path d="M12,11 C11,14 13,16 12,19" />
+      <path d="M16,10.5 C17,13 18.5,15 17,18" />
     </svg>
   );
 }
