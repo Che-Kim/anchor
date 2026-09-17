@@ -33,11 +33,11 @@ const SECTIONS = [
 export default function Home() {
   return (
     <>
-      <Masthead right={<JellyfishNamePill />} />
+      <Masthead right={<JellyfishNamePill />} bordered={false} />
 
       <main className="mx-auto w-full max-w-[1240px] flex-1 px-5 sm:px-8">
         {/* Asymmetric masthead block — type left, plate right. */}
-        <section className="grid grid-cols-1 gap-10 border-b border-rule py-14 lg:grid-cols-12 lg:gap-8 lg:py-20">
+        <section className="grid grid-cols-1 gap-10 py-14 lg:grid-cols-12 lg:gap-8 lg:py-20">
           <div className="lg:col-span-7">
             <p className="label">Anchor — a day, handled</p>
             <h1 className="display mt-5 text-[clamp(3.25rem,9vw,5.75rem)] text-ink">
@@ -45,46 +45,15 @@ export default function Home() {
               <br />
               Sail?
             </h1>
-            <p className="mt-6 max-w-md text-[17px] leading-relaxed text-ink-2">
-              Three tools for the shape of a student week — one to plan it, one
-              to survive it, one to remember it.
-            </p>
-            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2">
-              <Link
-                href="/plan"
-                className="group inline-flex items-center gap-2 text-[15px] font-medium text-ink"
-              >
-                <span className="border-b border-ink pb-0.5 transition-colors group-hover:border-accent group-hover:text-accent">
-                  Start with today
-                </span>
-                <span
-                  aria-hidden="true"
-                  className="transition-transform group-hover:translate-x-1"
-                >
-                  →
-                </span>
-              </Link>
-              <span className="label">No account. Local to this machine.</span>
-            </div>
           </div>
 
           <div className="flex items-end justify-start lg:col-span-5 lg:justify-end">
-            <figure className="relative">
-              <Jellyfish size={168} mood="idle" className="text-ink" />
-              <figcaption className="label mt-3 max-w-[15rem] border-t border-rule pt-2 leading-[1.5]">
-                Fig. 1 — the companion. Names itself Jelli until told otherwise.
-              </figcaption>
-            </figure>
+            <Jellyfish size={168} mood="idle" className="text-ink" />
           </div>
         </section>
 
         {/* Index — rows on rules, not a card grid. */}
         <section className="py-4">
-          <div className="label flex items-center justify-between py-3">
-            <span>Index</span>
-            <span>Three parts</span>
-          </div>
-
           <ul className="border-t border-rule">
             {SECTIONS.map((s) => (
               <li key={s.href} className="border-b border-rule">
@@ -121,13 +90,6 @@ export default function Home() {
           </ul>
         </section>
       </main>
-
-      <footer className="border-t border-rule">
-        <div className="mx-auto flex max-w-[1240px] flex-wrap items-center justify-between gap-2 px-5 py-6 sm:px-8">
-          <span className="label">Anchor — built by Che Kim</span>
-          <span className="label">Waterloo, ON</span>
-        </div>
-      </footer>
     </>
   );
 }

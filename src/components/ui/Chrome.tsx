@@ -2,16 +2,20 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { JellyMark } from "@/components/jellyfish/Jellyfish";
 
-/** Full-bleed masthead. Hairline under, nothing floating, no blur. */
+/** Full-bleed masthead. Hairline under by default, nothing floating, no blur. */
 export function Masthead({
   crumb,
   right,
+  bordered = true,
 }: {
   crumb?: string;
   right?: ReactNode;
+  bordered?: boolean;
 }) {
   return (
-    <header className="sticky top-0 z-30 border-b border-rule bg-paper">
+    <header
+      className={`sticky top-0 z-30 bg-paper ${bordered ? "border-b border-rule" : ""}`}
+    >
       <div className="mx-auto flex h-14 max-w-[1240px] items-center gap-4 px-5 sm:px-8">
         <Link
           href="/"
